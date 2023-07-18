@@ -24,7 +24,7 @@ const socials = [
   },
   {
     icon: faMedium,
-    url: "https://medium.com/ahmadpiracha3",
+    url: "https://medium.com/ahmadpiracha",
   },
   {
     icon: faStackOverflow,
@@ -44,6 +44,31 @@ const Header = () => {
     }
   };
 
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const currentHeaderRef = headerRef.current;
+
+      if (!currentHeaderRef) return;
+
+      if (lastScrollY > currentScrollY) {
+        currentHeaderRef.style.transform = "translateY(0)";
+      } else {
+        currentHeaderRef.style.transform = "translateY(-200px)";
+      }
+      lastScrollY = currentScrollY;
+    };
+    // Set up listeners for the scroll event
+
+    window.addEventListener("scroll", handleScroll);
+    // Remove listeners
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <Box
       position="fixed"
@@ -55,6 +80,7 @@ const Header = () => {
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
+      ref={headerRef}
     >
       <Box color="white" maxWidth="1280px" margin="0 auto">
         <HStack
