@@ -101,7 +101,7 @@ const Header = () => {
                   href={social.url}
                   target="_blank"
                 >
-                  <FontAwesomeIcon icon={social.icon} size="2x" />
+                  <FontAwesomeIcon icon={social.icon} size="1x" />
                 </a>
               ))}
             </HStack>
